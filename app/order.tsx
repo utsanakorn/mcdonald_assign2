@@ -1,20 +1,61 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import McHeader from "../components/McHeader";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Order() {
+  const { theme, isDark } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Order Page</Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Start a fake order</Text>
-      </TouchableOpacity>
+    <View style={[styles.screen, { backgroundColor: theme.background }]}>
+      <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
+
+      <McHeader />
+
+      <View style={styles.content}>
+        <Text style={[styles.title, { color: theme.text }]}>Order Page</Text>
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Start Order</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
-  button: { backgroundColor: "#FFC72C", padding: 12, borderRadius: 8 },
-  buttonText: { color: "#000", fontWeight: "600" },
+  screen: {
+    flex: 1,
+  },
+
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+  },
+
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+
+  button: {
+    backgroundColor: "#FFC72C",
+    paddingVertical: 14,
+    paddingHorizontal: 28,
+    borderRadius: 8,
+  },
+
+  buttonText: {
+    color: "#000",
+    fontWeight: "600",
+    fontSize: 16,
+  },
 });
